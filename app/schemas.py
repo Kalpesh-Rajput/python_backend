@@ -19,10 +19,24 @@ class PostDelete(PostBase):
     pass 
 
 
+    
+class UserOut(BaseModel):
+    id    : int
+    email : EmailStr
+    created_at : datetime
+    
+    model_config = {
+    "from_attributes": True
+}
+    # class Config:
+    #     orm_mode = True
+ 
+
 class Post(PostBase):
     id : int
     created_at : datetime
     owner_id : int
+    owner : UserOut
     
     # class Config:
     #     orm_mode = True
@@ -30,8 +44,7 @@ class Post(PostBase):
     model_config = {
     "from_attributes": True
 }
-    
-    
+   
 
 
 
@@ -52,16 +65,6 @@ class UserCreate(BaseModel):
     email: EmailStr
     password : str
     
-class UserOut(BaseModel):
-    id    : int
-    email : EmailStr
-    created_at : datetime
-    
-    model_config = {
-    "from_attributes": True
-}
-    # class Config:
-    #     orm_mode = True
         
         
 class UserLogin(BaseModel):
